@@ -1,0 +1,109 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  background: #e9e6e4;
+}
+
+.container {
+  height: 90vh;
+  max-height: 800px;
+  display: grid;
+  grid-template-rows: 40% 1fr;
+  border-bottom: 1px solid black;
+}
+.container .bottom-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+.container .bottom-row .column {
+  /* Add your styles for each column here */
+  padding: 20px;
+  font-size: 18px;
+  height: 60vh; /* Set the column height to 75% of the viewport height */
+  overflow-y: scroll; /* Enable vertical scrolling within the column */
+  scroll-snap-type: y mandatory; /* Enable scroll snapping for each post */
+  padding: 0;
+  position: relative;
+}
+.container .bottom-row .column .post {
+  height: 100%; /* Each post will cover 100% of the column height */
+  scroll-snap-align: start; /* Snap each post to the start of the column */
+  padding: 10px; /* Add some padding between posts */
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.container .bottom-row .column .post::before {
+  content: "";
+  height: 1px;
+  width: 85%;
+  background: #94918f;
+  position: absolute;
+  top: 0;
+  left: 5%;
+}
+.container .bottom-row .column .post::after {
+  content: "";
+  background: #94918f;
+  width: 1px;
+  height: 80%;
+  position: absolute;
+  top: 10%;
+  right: 0;
+}
+.container .bottom-row .column .post a {
+  text-decoration: none;
+}
+.container .bottom-row .column .post h2, .container .bottom-row .column .post p {
+  margin-bottom: 0.7rem;
+  padding: 0;
+}
+.container .bottom-row .column .post .title {
+  font-size: 1.4rem;
+  color: #121418;
+  font-family: "Space Grotesk", sans-serif;
+}
+.container .bottom-row .column .post .author {
+  font-size: 0.8rem;
+  color: #161419;
+  font-family: "Playfair Display", serif;
+}
+.container .bottom-row .column .post .summary {
+  font-size: 0.9rem;
+  color: #161419;
+  font-family: "Inter", sans-serif;
+}
+
+/* For webkit-based browsers (Chrome, Safari) */
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
+/* For Firefox and other browsers */
+/* Hide the scrollbar */
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+/* Hide scrollbar thumb */
+.scrollbar-hidden::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}/*# sourceMappingURL=App.css.map */

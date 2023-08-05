@@ -1,43 +1,74 @@
 import React, { useEffect, useState } from 'react'
+import { Navigate, useParams } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css'
-import jwtDecode from 'jwt-decode'
-import { Navigate } from 'react-router-dom';
+// import jwtDecode from 'jwt-decode'
 
-const CreatePost = () => {
+const EditPost = () => {
     const [title, setTitle] = useState('')
     const [summary, setSummary] = useState('')
     const [content, setContent] = useState('')
-    const [success, setSuccess] = useState(false)
-    const [id, setId] = useState('')
+    const [postId, setPostId] = useState('')
     const [selectedCategory, setSelectedCategory] = useState('health')
+    const [success, setSuccess] = useState(false)
+    const { id } = useParams()
     
-    const formData = { title, summary, content, _id: id, categories: selectedCategory };
+    const formData = { title, summary, content, _id: postId, categories: selectedCategory };
     // console.log(formData)
 
     const handleChange = (value) => {
         setContent(value);
     };
 
+
+    useEffect(() => {
+
+        const fetchPost = async () => {
+            try {
+              const response = await fetch(`http://localhost:3000/users/post/${id}`);
+              const data = await response.json();
+              setTitle(data.title)
+              setSummary(data.summary)
+              setContent(data.content)
+              setSelectedCategory(data.categories)
+              setPostId(id)
+            } catch (error) {
+              console.error('Error fetching posts:', error);
+            }
+        }
+
+        fetchPost()
+
+    }, [])
+
+    const handleDelete = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/users/delete/${id}`, {
+          method: 'DELETE',
+        })
+        .then ((response) => {
+          alert("Deleted Successfully!")
+          setSuccess(true)
+      })
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+
     const handleSubmit = async (e) => {
         e.preventDefault()
 
         try {
-            const response = await fetch('http://localhost:3000/users/create', {
-                method: 'POST',
+            const response = await fetch(`http://localhost:3000/users/update/${id}`, {
+                method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(formData)
             })
             .then ((response) => {
-                if (response.ok) {
-                    setTitle('')
-                    setSummary('')
-                    setContent('')
-                }
-
-                alert("Post created Successfully!")
+                alert("Post patched Successfully!")
                 setSuccess(true)
             })
         } catch (err) {
@@ -47,23 +78,13 @@ const CreatePost = () => {
         console.log(formData)
     }
 
-    useEffect(() => {
-        const token = localStorage.getItem('accessToken')
+    if (success) return <Navigate to={'/test'} />
 
-        if (!token) {
-            window.location.replace('/login')
-            return
-        }
-
-        const decodedToken = jwtDecode(token)
-        setId(decodedToken.id)
-    }, [title, summary, content])
-    
-    if (success) return <Navigate to={'/'} />
-    
-    return (
-        <div>
-          <form onSubmit={handleSubmit}>
+  return (
+    <div>
+        <form
+            onSubmit={handleSubmit}
+        >
             <div>
               <label>
                 <input
@@ -110,8 +131,9 @@ const CreatePost = () => {
 
             <button type="submit">Create post</button>
           </form>
-        </div>
-      );
-    };
-    
-    export default CreatePost;    
+          <button onClick={handleDelete}>Delete</button>
+    </div>
+  )
+}
+
+export default EditPost

@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,400;1,500&family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+$title: "Space Grotesk", sans-serif;
+$subtitle: "Inter", sans-serif;
+$italic: "Playfair Display", serif;
+$blog-bg: #e9e6e4;
+$body-bg: #121418;
+$title-color: #121418;
+$subtitle-color: #161419;
+$border-color: #94918f;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    background: $blog-bg;
+}
+// start of test code
+// Set the height of the top row to 25% of the viewport height
+
+.container {
+    height: 90vh;
+    max-height: 800px;
+    display: grid;
+    grid-template-rows: 40% 1fr;
+    border-bottom: 1px solid black;
+  
+    .top-row {
+        // height: 25vh;
+    }
+  
+    .bottom-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr); // Five columns of equal width (1fr each)
+      gap: 10px; // Add some gap between columns
+  
+      .column {
+        /* Add your styles for each column here */
+        // border: 1px solid #ccc;
+        padding: 20px;
+        // background-color: #ffffff;
+        font-size: 18px;
+        height: 60vh; /* Set the column height to 75% of the viewport height */
+        overflow-y: scroll; /* Enable vertical scrolling within the column */
+        scroll-snap-type: y mandatory; /* Enable scroll snapping for each post */
+        padding: 0;
+        position: relative;
+
+
+        .post {
+            height: 100%; /* Each post will cover 100% of the column height */
+            // border: 1px solid red;
+            scroll-snap-align: start; /* Snap each post to the start of the column */
+            padding: 10px; /* Add some padding between posts */
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            // justify-content: space-around;
+
+            
+            &::before {
+                content: '';
+                height: 1px;
+                width: 85%;
+                background: $border-color;
+                position: absolute;
+                top: 0;
+                left: 5%;
+            }
+
+            
+            &::after {
+                content: '';
+                background: $border-color;
+                width: 1px;
+                height: 80%;
+                position: absolute;
+                top: 10%;
+                right: 0;
+            }
+          
+            a {
+                text-decoration: none;
+            }
+
+            h2, p {
+                margin-bottom: 0.7rem;
+                padding: 0;
+            }
+
+            .title {
+                font-size: 1.4rem;
+                color: $title-color;
+                font-family: $title;
+            }
+
+            .author {
+                font-size: .8rem;
+                color: $subtitle-color;
+                font-family: $italic;
+            }
+
+            .summary {
+                font-size: .9rem;
+                color: $subtitle-color;
+                font-family: $subtitle;
+            }
+          }
+      }
+    }
+  }
+  
+  /* For webkit-based browsers (Chrome, Safari) */
+/* Hide the scrollbar */
+::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  
+  /* For Firefox and other browsers */
+  /* Hide the scrollbar */
+  .scrollbar-hidden {
+    scrollbar-width: none;
+  }
+  
+  /* Hide scrollbar thumb */
+  .scrollbar-hidden::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  

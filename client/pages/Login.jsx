@@ -41,7 +41,7 @@ const Login = () => {
     
     console.log(token);
 
-    if (redirect) return <Navigate to={'/protected'} />
+    if (redirect) return <Navigate to={'/create-post'} />
 
     return (
         <form

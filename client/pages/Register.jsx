@@ -1,27 +1,83 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Register = () => {
-    const [username, setUsername] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+    // const [username, setUsername] = useState('')
+    // const [email, setEmail] = useState('')
+    // const [password, setPassword] = useState('')
 
-    const formData = {
-        username: username,
-        email: email,
-        password: password,
+    const [formData, setFormData] = useState({
+        username: '',
+        email: '',
+        password: '',
+    });
+
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData({
+          ...formData,
+          [name]: value
+        });
     };
+
+    // const fiction = [
+    //     {
+    //       "username": "Tony Stark",
+    //       "email": "tony.stark@example.com",
+    //       "password": "password123"
+    //     },
+    //     {
+    //       "username": "Clark Kent",
+    //       "email": "clark.kent@example.com",
+    //       "password": "kryptonite123"
+    //     },
+    //     {
+    //       "username": "Diana Prince",
+    //       "email": "diana.prince@example.com",
+    //       "password": "amazon123"
+    //     },
+    //     {
+    //       "username": "Peter Parker",
+    //       "email": "peter.parker@example.com",
+    //       "password": "spidey123"
+    //     },
+    //     {
+    //       "username": "Bruce Wayne",
+    //       "email": "bruce.wayne@example.com",
+    //       "password": "bat123"
+    //     },
+    //     {
+    //       "username": "Steve Rogers",
+    //       "email": "steve.rogers@example.com",
+    //       "password": "shield123"
+    //     },
+    //     {
+    //       "username": "Natasha Romanoff",
+    //       "email": "natasha.romanoff@example.com",
+    //       "password": "redroom123"
+    //     },
+    //      {
+    //       "username": "Arthur Curry",
+    //       "email": "arthur.curry@example.com",
+    //       "password": "aquaman123"
+    //      },
+    //      {
+    //       "username": "Wanda Maximoff",
+    //       "email": "arthur.curry@example.com",
+    //       "password": "scarletwitch123"
+    //      }
+    //   ]
+      
+
 
     console.log(formData)
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
+    const submit = (submitData) => {
         fetch('http://localhost:3000/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(formData),
+            body: JSON.stringify(submitData),
         })
         .then((response) => response.json())
         .then((data) => {
@@ -30,10 +86,18 @@ const Register = () => {
         .catch((error) => {
             console.error(error);
         });
+    }
 
-        setUsername('')
-        setEmail('')
-        setPassword('')
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        submit(formData)
+
+        setFormData({
+            username: '',
+            email: '',
+            password: '',
+          })
     };
 
     return (
@@ -46,8 +110,8 @@ const Register = () => {
             <input
                 type="text"
                 name="username"
-                value={username}
-                onChange={e => setUsername(e.target.value)}
+                value={formData.username}
+                onChange={handleChange}
                 required
             />
             </label>
@@ -58,8 +122,8 @@ const Register = () => {
             <input
                 type="email"
                 name="email"
-                value={email}
-                onChange={e => setEmail(e.target.value)}
+                value={formData.email}
+                onChange={handleChange}
                 required
             />
             </label>
@@ -71,7 +135,7 @@ const Register = () => {
                 type="password"
                 name="password"
                 value={formData.password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={handleChange}
                 required
             />
             </label>
