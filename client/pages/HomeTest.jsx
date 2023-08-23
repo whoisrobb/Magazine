@@ -12,7 +12,8 @@ const HomeTest = () => {
     // Define a function to fetch the data
     const fetchPosts = async (category) => {
       try {
-        const response = await fetch(`http://localhost:3000/users/posts/cat?cat=${category}`);
+        // const response = await fetch(`http://localhost:3000/users/posts/cat?cat=${category}`);
+        const response = await fetch(`https://magazine-api.vercel.app/users/posts/cat?cat=${category}`);
         if (!response.ok) {
           throw new Error('Failed to fetch data');
         }

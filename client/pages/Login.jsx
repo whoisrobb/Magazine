@@ -16,7 +16,8 @@ const Login = () => {
         };
         console.log(formData)
     
-        fetch('http://localhost:3000/auth/login', {
+        // fetch('http://localhost:3000/auth/login', {
+        fetch('https://magazine-api.vercel.app/auth/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -9,7 +9,8 @@ const Post = () => {
 
         const fetchPost = async () => {
             try {
-              const response = await fetch(`http://localhost:3000/users/post/${id}`);
+              // const response = await fetch(`http://localhost:3000/users/post/${id}`);
+              const response = await fetch(`https://magazine-api.vercel.app/users/post/${id}`);
               const data = await response.json();
               setPost(data);
             } catch (error) {

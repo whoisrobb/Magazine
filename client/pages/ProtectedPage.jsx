@@ -24,7 +24,8 @@ const ProtectedPage = () => {
         console.log('Token:', token);
         console.log('Decoded Token:', decodedToken);
 
-        const response = await fetch('http://localhost:3000/users/posts', {
+        // const response = await fetch('http://localhost:3000/users/posts', {
+        const response = await fetch('https://magazine-api.vercel.app/users/posts', {
         //   headers: {
         //     'Authorization': `Bearer ${token}`, // Include the token in the 'Authorization' header
         //   },

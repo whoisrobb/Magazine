@@ -72,7 +72,8 @@ const Register = () => {
     console.log(formData)
 
     const submit = (submitData) => {
-        fetch('http://localhost:3000/auth/register', {
+        // fetch('http://localhost:3000/auth/register', {
+        fetch('https://magazine-api.vercel.app/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

@@ -10,7 +10,8 @@ const Home = () => {
 
   const fetchPosts = async () => {
     try {
-      const response = await fetch('http://localhost:3000/users/posts');
+      // const response = await fetch('http://localhost:3000/users/posts');
+      const response = await fetch('https://magazine-api.vercel.app/users/posts');
       const data = await response.json();
       setPosts(data);
     } catch (error) {

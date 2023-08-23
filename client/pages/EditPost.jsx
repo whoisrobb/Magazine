@@ -25,7 +25,8 @@ const EditPost = () => {
 
         const fetchPost = async () => {
             try {
-              const response = await fetch(`http://localhost:3000/users/post/${id}`);
+              // const response = await fetch(`http://localhost:3000/users/post/${id}`);
+              const response = await fetch(`https://magazine-api.vercel.app/users/post/${id}`);
               const data = await response.json();
               setTitle(data.title)
               setSummary(data.summary)
@@ -43,7 +44,8 @@ const EditPost = () => {
 
     const handleDelete = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/users/delete/${id}`, {
+        // const response = await fetch(`http://localhost:3000/users/delete/${id}`, {
+        const response = await fetch(`https://magazine-api.vercel.app/users/delete/${id}`, {
           method: 'DELETE',
         })
         .then ((response) => {
@@ -60,7 +62,8 @@ const EditPost = () => {
         e.preventDefault()
 
         try {
-            const response = await fetch(`http://localhost:3000/users/update/${id}`, {
+            // const response = await fetch(`http://localhost:3000/users/update/${id}`, {
+            const response = await fetch(`https://magazine-api.vercel.app/users/update/${id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
