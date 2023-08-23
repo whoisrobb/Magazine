@@ -25,5 +25,6 @@ mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }).then(() => {
-    app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
+    // app.listen(PORT, () => console.log(`http://localhost:${PORT}`))
+    app.listen(PORT, () => console.log('https://magazine-blog-chi.vercel.app'))
 }).catch((err) => console.log(err))
