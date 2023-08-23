@@ -10,7 +10,8 @@ import cors from "cors"
 const app = express()
 dotenv.config()
 app.use(express.json())
-app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
+// app.use(cors({ credentials: true, origin: 'http://localhost:5173' }))
+app.use(cors({ credentials: true, origin: 'https://magazine-blog-chi.vercel.app' }))
 
 
 /* ROUTES */
